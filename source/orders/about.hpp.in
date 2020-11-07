@@ -1,0 +1,5 @@
+// Copyright (C) 2020 luna_koly
+
+
+#define __ORDERS_VERSION_MAJOR__ @OrdersProject_VERSION_MAJOR@
+#define __ORDERS_VERSION_MINOR__ @OrdersProject_VERSION_MINOR@

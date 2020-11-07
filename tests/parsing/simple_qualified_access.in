@@ -1,0 +1,2 @@
+fun doThings(): Test.Rest
+    a.name, b.index = "test", 20

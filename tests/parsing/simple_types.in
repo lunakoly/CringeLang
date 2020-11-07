@@ -1,0 +1,21 @@
+var a = 10
+var b = "Hello!"
+
+if a + b
+    c = a + b
+    let d = b
+else
+    "sorry"
+
+fun go
+    let NAME = "Nick"
+    NAME
+
+go.NAME
+
+var test: Int -> Int
+let fest: Bool -> Bool
+typealias Callback = String -> String
+typealias Callback = Char
+let rest: Char
+let mest: Fhar

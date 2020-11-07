@@ -1,0 +1,17 @@
+var keker, loler: (Loler<Int, String<Bool>>, Int) -> Char = "hello", 10 + 31 * 4 - 1 - 4 - -4 +%110101-$76+#ae+"test"
+
+var a, b = 10, 11
+var c: Int
+
+let pi, e = 3.14159265, 2.71828182
+
+typealias Callback = Int -> Int
+typealias Chain<T> = T -> Test<String> -> Bool
+
+a, b = 0
+dawd = 1
+
+if test + fest a = 'd' else b = -'d' if gest * 2
+    keker = 10
+    a, b = 0, 1
+else loler = 12 andOnNewLine = "Hello"

@@ -1,0 +1,17 @@
+if 10 - 5
+    sayHello
+else
+    sayBye
+
+if iAmTrue doThings
+else doOtherThings
+
+if True sayTest else
+    a = b
+    c = 10 + a
+
+if test sayFest
+    errorIndent
+    error2
+
+a, b = 10, 20

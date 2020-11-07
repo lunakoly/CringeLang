@@ -1,0 +1,5 @@
+// Copyright (C) 2020 luna_koly
+
+
+#define __CRINGE_VERSION_MAJOR__ @CringeProject_VERSION_MAJOR@
+#define __CRINGE_VERSION_MINOR__ @CringeProject_VERSION_MINOR@

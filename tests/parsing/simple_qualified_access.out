@@ -1,0 +1,10 @@
+==== Diagnostics ====
+
+==== AST ====
+[fun doThings ([]): Test.Rest [[([a.name, b.index] = ["test", 20])]]]
+
+==== RESOLVED ====
+*** FILE 0 ***
+[fun doThings ([]): [ERROR:DIFFICULT_TYPE] [[([a.name, b.index] = ["test", 20])]]]
+
+==== Done ====

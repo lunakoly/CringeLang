@@ -1,0 +1,8 @@
+fun test(a: Int = 10, b: String): Float
+    a = 10
+    b = 29
+
+fun test: Boolean print * 2
+
+fun rest
+    keker
