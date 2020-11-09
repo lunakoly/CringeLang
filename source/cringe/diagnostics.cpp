@@ -104,3 +104,15 @@ __PRINT_DIAGNOSTIC__(TypeRedeclarationDiagnostic) {
     return __DIAGNOSTIC_HEADER__
         << "Type `" << details.name << "` has already been declared.";
 }
+
+
+__PRINT_DIAGNOSTIC__(InaccessibleTypeInformationDiagnostic) {
+    return __DIAGNOSTIC_HEADER__
+        << "Couldn't retrieve the type information from the declaration resolved from `" << details.accessor << "`.";
+}
+
+
+__PRINT_DIAGNOSTIC__(UnresolvedReferenceDiagnostic) {
+    return __DIAGNOSTIC_HEADER__
+        << "Unresolved reference `" << details.accessor << "`.";
+}

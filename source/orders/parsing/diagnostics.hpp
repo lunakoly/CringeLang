@@ -25,7 +25,7 @@
     /**                                                     \
      * Some place.                                          \
      */                                                     \
-    orders::Range range;                              \
+    orders::Range range;                                    \
     /**                                                     \
      * Well, maybe range is fine enough                     \
      * and we could run through the file once               \

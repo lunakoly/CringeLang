@@ -4,9 +4,37 @@
 ==== Resolved AST ====
 [if (10 - 5) [[[sayHello]]] else [[[sayBye]]], if iAmTrue [[doThings]] else [[doOtherThings]], if True [[sayTest]] else [[([a] = [b]), ([c] = [(10 + a)])]], if test [[sayFest]], [[errorIndent], [error2]], ([a, b] = [10, 20])]
 
+==== Global declarations ====
+-- Char := Char
+-- Int := Int
+-- Real := Real
+-- String := String
+
 ==== Diagnostics ====
  13 | ...<newline>    errorIndent...
                   ~~~~^~~~~~~~~~~
 Error > Unexpected indent level > `INDENT` shouldn't go here.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `sayHello`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `sayBye`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `iAmTrue`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `doThings`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `doOtherThings`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `True`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `sayTest`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `test`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `sayFest`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `errorIndent`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `error2`.
 
 ==== Done ====

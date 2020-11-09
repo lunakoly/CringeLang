@@ -1,8 +1,16 @@
 ==== Raw AST ====
 [fun doThings ([]): Test.Rest [[([a.name, b.index] = ["test", 20])]]]
 
+!!DeepDeclarationResolver has no implementation for non-identifier type nodes names: `Test.Rest`!!
 ==== Resolved AST ====
-[fun doThings ([]): [ERROR:DIFFICULT_TYPE] [[([a.name, b.index] = ["test", 20])]]]
+[fun doThings ([]): [DIFFICULT_TYPE] [[([a.name, b.index] = ["test", 20])]]]
+
+==== Global declarations ====
+-- Char := Char
+-- Int := Int
+-- Real := Real
+-- String := String
+-- doThings := fun doThings ([]): [DIFFICULT_TYPE] [[([a.name, b.index] = ["test", 20])]]
 
 ==== Diagnostics ====
 

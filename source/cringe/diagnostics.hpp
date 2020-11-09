@@ -8,6 +8,15 @@
 #include <orders/util/printable.hpp>
 #include <orders/parsing/diagnostics.hpp>
 
+
+// #define __DIAGNOSTIC_WITH_FILENAME__                        \
+//     __DIAGNOSTIC__                                          \
+//     /**                                                     \
+//      * Full path to the input file.                         \
+//      */                                                     \
+//     std::string filename;
+
+
 namespace cringe {
     /**
      * 'dawd instead of 'd'.
@@ -155,5 +164,33 @@ namespace cringe {
          * The name of the type.
          */
         std::string name;
+    };
+
+    /**
+     * Can't access type information during
+     * type resolution.
+     */
+    struct InaccessibleTypeInformationDiagnostic {
+        __DIAGNOSTIC__
+
+        /**
+         * The way the user attempted to
+         * access the type info.
+         */
+        std::string accessor;
+    };
+
+    /**
+     * Attempt to access an undeclared
+     * identifier.
+     */
+    struct UnresolvedReferenceDiagnostic {
+        __DIAGNOSTIC__
+
+        /**
+         * The way the user attempted to
+         * access the undeclared entity.
+         */
+        std::string accessor;
     };
 }

@@ -27,6 +27,18 @@ cringe::AST::Node * parse_file(
 }
 
 
+void visualize_scope(cringe::AST::Scope * scope, const std::string & indent = "--") {
+    for (auto that : scope->get_declarations()) {
+        std::cout << indent << ' ' << that.first << " := " << *that.second << std::endl;
+        auto scope = extract_scope(that.second);
+
+        if (scope != nullptr) {
+            visualize_scope(scope, indent + "--");
+        }
+    }
+}
+
+
 int run() {
     if (arrrgh::options<int>["tab-size"] <= 1) {
         std::cout << "Wait > Tab size `" << arrrgh::options<int>["tab-size"] << "` is invalid. It must be > 1";
@@ -54,14 +66,18 @@ int run() {
     std::cout << *global << std::endl;
     std::cout << std::endl;
 
-    cringe::resolve_scopes(global);
-    cringe::resolve_global_declarations(global);
+    cringe::resolve_scopes(session, global);
+    cringe::resolve_global_declarations(session, global);
     cringe::resolve_deep_declarations(session, global);
 
     auto files = global->details.files->details.values;
 
     std::cout << "==== Resolved AST ====" << std::endl;
     std::cout << *global << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "==== Global declarations ====" << std::endl;
+    visualize_scope(global->details.scope);
     std::cout << std::endl;
 
     std::cout << "==== Diagnostics ====" << std::endl;

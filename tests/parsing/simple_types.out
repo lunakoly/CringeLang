@@ -1,9 +1,29 @@
 ==== Raw AST ====
 [var [a]: <!MISSING TYPE!><!> = [10], var [b]: <!MISSING TYPE!><!> = ["Hello!"], if (a + b) [[([c] = [(a + b)]), let [d]: <!MISSING TYPE!><!> = [b]]] else [[["sorry"]]], fun go ([]): <!MISSING RETURN TYPE!><!> [[let [NAME]: <!MISSING TYPE!><!> = ["Nick"], [NAME]]], [go.NAME], var [test]: (Int -> Int), let [fest]: (Bool -> Bool), typealias Callback = (String -> String), typealias Callback = Char, let [rest]: Char, let [mest]: Fhar]
 
+!!GlobalDeclarationResolver has no implementation for non-identifier type aliases names: `Callback`!!
+!!GlobalDeclarationResolver has no implementation for non-identifier type aliases names: `Callback`!!
+!!DeepDeclarationResolver has no implementation for non-identifier type aliases names: `Callback`!!
+!!DeepDeclarationResolver has no implementation for non-identifier type aliases names: `Callback`!!
 ==== Resolved AST ====
-[var [a]: Int = [10], var [b]: String = ["Hello!"], if (a + b) [[([c] = [(a + b)]), let [d]: String = [b]]] else [[["sorry"]]], fun go ([]): String [[let [NAME]: String = ["Nick"], [NAME]]], [go.NAME], var [test]: [BINARY], let [fest]: [BINARY], typealias Callback = [BINARY], typealias Callback = Char, let [rest]: Char, let [mest]: [ERROR:UNRESOLVED_IDENTIFIER]]
+[var [a]: Int = [10], var [b]: String = ["Hello!"], if (a + b) [[([c] = [(a + b)]), let [d]: String = [b]]] else [[["sorry"]]], fun go ([]): String [[let [NAME]: String = ["Nick"], [NAME]]], [go.NAME], var [test]: [BINARY], let [fest]: [BINARY], typealias Callback = [BINARY], typealias Callback = Char, let [rest]: Char, let [mest]: [UNRESOLVED_REFERENCE]]
+
+==== Global declarations ====
+-- Char := Char
+-- Int := Int
+-- Real := Real
+-- String := String
+-- a := var [a]: Int = [10]
+-- b := var [b]: String = ["Hello!"]
+-- fest := let [fest]: [BINARY]
+-- go := fun go ([]): String [[let [NAME]: String = ["Nick"], [NAME]]]
+---- NAME := let [NAME]: String = ["Nick"]
+-- mest := let [mest]: [UNRESOLVED_REFERENCE]
+-- rest := let [rest]: Char
+-- test := var [test]: [BINARY]
 
 ==== Diagnostics ====
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `Fhar`.
 
 ==== Done ====

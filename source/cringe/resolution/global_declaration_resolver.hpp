@@ -5,6 +5,7 @@
 
 #pragma once
 
+#include "../session.hpp"
 #include "../ast/visitor.hpp"
 
 
@@ -12,5 +13,5 @@ namespace cringe {
     /**
      * Registers global scope entities.
      */
-    void resolve_global_declarations(AST::Node * node);
+    void resolve_global_declarations(Session & session, AST::Node * node);
 }

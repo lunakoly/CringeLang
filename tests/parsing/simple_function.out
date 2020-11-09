@@ -2,8 +2,24 @@
 [fun test ([var [a]: Int = [10], var [b]: String]): Float [[([a] = [10]), ([b] = [29])]], fun test ([]): Boolean [[(print * 2)]], fun rest ([]): <!MISSING RETURN TYPE!><!> [[[keker]]]]
 
 ==== Resolved AST ====
-[fun test ([var [a]: Int = [10], var [b]: String]): [ERROR:UNRESOLVED_IDENTIFIER] [[([a] = [10]), ([b] = [29])]], fun test ([]): [ERROR:UNRESOLVED_IDENTIFIER] [[(print * 2)]], fun rest ([]): [ERROR:UNRESOLVED_IDENTIFIER] [[[keker]]]]
+[fun test ([var [a]: Int = [10], var [b]: String]): [UNRESOLVED_REFERENCE] [[([a] = [10]), ([b] = [29])]], fun test ([]): [UNRESOLVED_REFERENCE] [[(print * 2)]], fun rest ([]): [UNRESOLVED_REFERENCE] [[[keker]]]]
+
+==== Global declarations ====
+-- Char := Char
+-- Int := Int
+-- Real := Real
+-- String := String
+-- a := var [a]: Int = [10]
+-- b := var [b]: String
+-- rest := fun rest ([]): [UNRESOLVED_REFERENCE] [[[keker]]]
+-- test := fun test ([]): [UNRESOLVED_REFERENCE] [[(print * 2)]]
 
 ==== Diagnostics ====
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `Float`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `Boolean`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `keker`.
 
 ==== Done ====

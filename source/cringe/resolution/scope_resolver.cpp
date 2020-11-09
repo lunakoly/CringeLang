@@ -18,7 +18,7 @@ struct ScopeResolver : public Explorer {
     std::stack<Scope *> scopes;
 
     virtual void visit(Node * it) override {
-        std::cout << "UNIMPLEMENTED FOR " << *it;
+        std::cout << "!!ScopeResolver wasn't implemented for `" << *it << "`!!" << std::endl;
     }
 
     virtual void visit(DetailedNode<GlobalNode> * it) override {
@@ -71,7 +71,7 @@ struct ScopeResolver : public Explorer {
 };
 
 
-void cringe::resolve_scopes(AST::Node * node) {
+void cringe::resolve_scopes(Session & session, AST::Node * node) {
     ScopeResolver resolver;
     node->accept(&resolver);
 }

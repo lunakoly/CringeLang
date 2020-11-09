@@ -6,32 +6,10 @@ using namespace cringe;
 using namespace cringe::AST;
 
 
-// Type::Type(
-//     AST::Node * source,
-//     const std::string & name
-// )
-//     : source(source)
-//     , name(name)
-//     , scope(new Scope()) {}
-
-// Type * Type::Builtins::Any    = new Type{"Any",    nullptr};
-// Type * Type::Builtins::Int    = new Type{"Int",    nullptr};
-// Type * Type::Builtins::Unit   = new Type{"Unit",   nullptr};
-// Type * Type::Builtins::Bool   = new Type{"Bool",   nullptr};
-// Type * Type::Builtins::Char   = new Type{"Char",   nullptr};
-// Type * Type::Builtins::String = new Type{"String", nullptr};
-
-
 Scope::Scope(Scope * parent) : parent(parent) {}
 
 Scope * Scope::create_global() {
     auto global = new Scope();
-    // global.add(Type::Builtins::Any);
-    // global.add(Type::Builtins::Int);
-    // global.add(Type::Builtins::Unit);
-    // global.add(Type::Builtins::Bool);
-    // global.add(Type::Builtins::Char);
-    // global.add(Type::Builtins::String);
 
     global->add("Int", new DetailedNode{TypeNode{
         .identifier = new DetailedNode{IdentifierNode{"Int"}},
@@ -55,33 +33,6 @@ Scope * Scope::create_global() {
 
     return global;
 }
-
-// bool Scope::contains(Type * type) {
-//     auto it = types.find(type->name);
-//     return it != types.end();
-// }
-
-// void Scope::add(Type * type) {
-//     types[type->name] = type;
-// }
-
-// Type * Scope::resolve(AST::Identifier * identifier) {
-//     auto it = types.find(identifier->value);
-
-//     if (it != types.end()) {
-//         if (identifier->further != nullptr) {
-//             return it->second->scope->resolve(identifier->further);
-//         }
-
-//         return it->second;
-//     }
-
-//     if (parent != nullptr) {
-//         return parent->resolve(identifier);
-//     }
-
-//     return nullptr;
-// }
 
 
 void Scope::add(const std::string & name, AST::Node * declaration) {
@@ -111,7 +62,7 @@ struct ScopeExtractor : public Visitor {
     }
 };
 
-Scope * extract_scope(Node * node) {
+Scope * cringe::AST::extract_scope(Node * node) {
     ScopeExtractor it;
     node->accept(&it);
     return it.result;
@@ -176,4 +127,9 @@ AST::Node * Scope::resolve(Session & session, AST::DetailedNode<AST::IdentifierN
     }
 
     return nullptr;
+}
+
+
+const std::map<std::string, AST::Node *> & Scope::get_declarations() const {
+    return declarations;
 }

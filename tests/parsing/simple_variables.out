@@ -4,6 +4,18 @@
 ==== Resolved AST ====
 [var [a]: Int = [10], var [b]: Int = [20], var [c]: [BINARY] = [((a * b) + 10)], let [pi, e]: Real = [3.14, 2.7], let [name]: String = ["Nick"]]
 
+==== Global declarations ====
+-- Char := Char
+-- Int := Int
+-- Real := Real
+-- String := String
+-- a := var [a]: Int = [10]
+-- b := var [b]: Int = [20]
+-- c := var [c]: [BINARY] = [((a * b) + 10)]
+-- e := let [pi, e]: Real = [3.14, 2.7]
+-- name := let [name]: String = ["Nick"]
+-- pi := let [pi, e]: Real = [3.14, 2.7]
+
 ==== Diagnostics ====
 
 ==== Done ====

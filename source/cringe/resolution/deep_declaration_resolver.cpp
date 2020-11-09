@@ -3,6 +3,8 @@
 #include "../ast/explorer.hpp"
 #include "../ast/scopes.hpp"
 
+#include "../diagnostics.hpp"
+
 #include <stack>
 #include <iostream>
 
@@ -105,9 +107,10 @@ struct DeepDeclarationResolver : public Explorer {
 
 
     virtual void visit(Node * it) override {
-        std::cout << "UNIMPLEMENTED FOR " << *it;
+        std::cout << "!!DeepDeclarationResolver wasn't implemented for `" << *it << "`!!" << std::endl;
+
         declarations.push($ TypeNode{
-            .identifier = $ IdentifierNode{"UNIMPLEMENTED"},
+            .identifier = $ IdentifierNode{"[UNIMPLEMENTED]"},
             .subtypes = $ NodeList()
         });
     }
@@ -133,7 +136,7 @@ struct DeepDeclarationResolver : public Explorer {
 
     virtual void visit(AST::DetailedNode<AST::ErrorNode> * it) override {
         declarations.push($ TypeNode{
-            .identifier = $ IdentifierNode{"ERROR"},
+            .identifier = $ IdentifierNode{"[ERROR]"},
             .subtypes = $ NodeList()
         });
     }
@@ -147,9 +150,6 @@ struct DeepDeclarationResolver : public Explorer {
     }
 
     virtual void visit(AST::DetailedNode<AST::ConstantDeclarationNode> * it) override {
-        it->details.constants->accept(this);
-        declarations.pop();
-
         DetailedNode<TypeNode> * type = nullptr;
 
         if (it->details.values != nullptr) {
@@ -186,7 +186,7 @@ struct DeepDeclarationResolver : public Explorer {
             if (name != nullptr) {
                 scopes.top()->add(name->details.value, it);
             } else {
-                // session.reporter <<
+                std::cout << "!!DeepDeclarationResolver encountered a non-identifier as a constant name name: `" << *names[that] << "`!!" << std::endl;
             }
         }
     }
@@ -209,14 +209,11 @@ struct DeepDeclarationResolver : public Explorer {
         if (name != nullptr) {
             scopes.top()->add(name->details.value, it);
         } else {
-            // session.reporter <<
+            std::cout << "!!DeepDeclarationResolver has no implementation for non-identifier type aliases names: `" << *it->details.type << "`!!" << std::endl;
         }
     }
 
     virtual void visit(AST::DetailedNode<AST::VariableDeclarationNode> * it) override {
-        it->details.variables->accept(this);
-        declarations.pop();
-
         DetailedNode<TypeNode> * type = nullptr;
 
         if (it->details.values != nullptr) {
@@ -253,7 +250,7 @@ struct DeepDeclarationResolver : public Explorer {
             if (name != nullptr) {
                 scopes.top()->add(name->details.value, it);
             } else {
-                // session.reporter <<
+                std::cout << "!!DeepDeclarationResolver encountered a non-identifier as a variable name name: `" << *names[that] << "`!!" << std::endl;
             }
         }
     }
@@ -284,16 +281,36 @@ struct DeepDeclarationResolver : public Explorer {
                     .declaration = that
                 });
             } else {
-                // session.reporter <<
+                std::stringstream rendered;
+                it->print(rendered);
+
+                session.reporter << InaccessibleTypeInformationDiagnostic{
+                    .filename = "[MISSING_FILENAME]",
+                    .line_number = 0,
+                    .range = {0, 0},
+                    .visualization = "[MISSING_VISUALIZATION]",
+                    .accessor = rendered.str()
+                };
+
                 declarations.push($ TypeNode{
-                    .identifier = $ IdentifierNode{"[ERROR:DECLARATION_WITHOUT_TYPE]"},
+                    .identifier = $ IdentifierNode{"[DECLARATION_WITHOUT_TYPE]"},
                     .subtypes = $ NodeList()
                 });
             }
         } else {
-            // session.reporter <<
+            std::stringstream rendered;
+            it->print(rendered);
+
+            session.reporter << UnresolvedReferenceDiagnostic{
+                .filename = "[MISSING_FILENAME]",
+                .line_number = 0,
+                .range = {0, 0},
+                .visualization = "[MISSING_VISUALIZATION]",
+                .accessor = rendered.str()
+            };
+
             declarations.push($ TypeNode{
-                .identifier = $ IdentifierNode{"[ERROR:UNRESOLVED_QA]"},
+                .identifier = $ IdentifierNode{"[UNRESOLVED_REFERENCE]"},
                 .subtypes = $ NodeList()
             });
         }
@@ -319,16 +336,36 @@ struct DeepDeclarationResolver : public Explorer {
                     .declaration = that
                 });
             } else {
-                // session.reporter <<
+                std::stringstream rendered;
+                it->print(rendered);
+
+                session.reporter << InaccessibleTypeInformationDiagnostic{
+                    .filename = "[MISSING_FILENAME]",
+                    .line_number = 0,
+                    .range = {0, 0},
+                    .visualization = "[MISSING_VISUALIZATION]",
+                    .accessor = rendered.str()
+                };
+
                 declarations.push($ TypeNode{
-                    .identifier = $ IdentifierNode{"[ERROR:DECLARATION_WITHOUT_TYPE]"},
+                    .identifier = $ IdentifierNode{"[DECLARATION_WITHOUT_TYPE]"},
                     .subtypes = $ NodeList()
                 });
             }
         } else {
-            // session.reporter <<
+            std::stringstream rendered;
+            it->print(rendered);
+
+            session.reporter << UnresolvedReferenceDiagnostic{
+                .filename = "[MISSING_FILENAME]",
+                .line_number = 0,
+                .range = {0, 0},
+                .visualization = "[MISSING_VISUALIZATION]",
+                .accessor = rendered.str()
+            };
+
             declarations.push($ TypeNode{
-                .identifier = $ IdentifierNode{"[ERROR:UNRESOLVED_IDENTIFIER]"},
+                .identifier = $ IdentifierNode{"[UNRESOLVED_REFERENCE]"},
                 .subtypes = $ NodeList()
             });
         }
@@ -359,22 +396,13 @@ struct DeepDeclarationResolver : public Explorer {
         auto that = extract<IdentifierNode>(it->details.identifier);
 
         if (it->details.subtypes->details.values.empty() && that != nullptr) {
+            // delegate calculations
             that->accept(this);
-
-            auto name = extract<IdentifierNode>(declarations.top()->details.identifier);
-
-            if (name->details.value == "[ERROR]") {
-                declarations.pop();
-                // session.reporter <<
-                declarations.push($ TypeNode{
-                    .identifier = $ IdentifierNode{"[ERROR:UNRESOLVED_TYPE]"},
-                    .subtypes = $ NodeList()
-                });
-            }
         } else {
-            // session.reporter <<
+            std::cout << "!!DeepDeclarationResolver has no implementation for non-identifier type nodes names: `" << *it->details.identifier << "`!!" << std::endl;
+
             declarations.push($ TypeNode{
-                .identifier = $ IdentifierNode{"[ERROR:DIFFICULT_TYPE]"},
+                .identifier = $ IdentifierNode{"[DIFFICULT_TYPE]"},
                 .subtypes = $ NodeList()
             });
         }
@@ -394,6 +422,16 @@ struct DeepDeclarationResolver : public Explorer {
         }
 
         it->details.return_type = declarations.top();
+
+        // REGISTER
+
+        auto name = extract<IdentifierNode>(it->details.name);
+
+        if (name != nullptr) {
+            scopes.top()->add(name->details.value, it);
+        } else {
+            std::cout << "!!DeepDeclarationResolver encountered a non-identifier as a function name: `" << *it->details.name << "`!!" << std::endl;
+        }
     }
 
     virtual void visit(DetailedNode<IfStatementNode> * it) override {

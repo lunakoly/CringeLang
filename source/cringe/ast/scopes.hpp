@@ -50,6 +50,11 @@ namespace cringe {
              */
             AST::Node * resolve(Session & session, AST::Node * node);
 
+            /**
+             * Allows to access the inner mapping.
+             */
+            const std::map<std::string, AST::Node *> & get_declarations() const;
+
         private:
             /**
              * Scope to search if the type wasn't
@@ -62,5 +67,11 @@ namespace cringe {
              */
             std::map<std::string, AST::Node *> declarations;
         };
+
+        /**
+         * Returns the scope associated with
+         * the given node or nullptr.
+         */
+        Scope * extract_scope(Node * node);
     }
 }

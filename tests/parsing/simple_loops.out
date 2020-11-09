@@ -4,9 +4,21 @@
 ==== Resolved AST ====
 [while ((doThings * 10) + 1) [[([a] = [10]), [(b * test)]]], while a [([b] = [10])], [[testError]], [done]]
 
+==== Global declarations ====
+-- Char := Char
+-- Int := Int
+-- Real := Real
+-- String := String
+
 ==== Diagnostics ====
  5 | ...<newline>    testError<newline><newline>...
                  ~~~~^~~~~~~~~
 Error > Unexpected indent level > `INDENT` shouldn't go here.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `a`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `testError`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `done`.
 
 ==== Done ====

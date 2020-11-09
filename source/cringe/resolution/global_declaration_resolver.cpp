@@ -13,13 +13,33 @@ using namespace cringe::AST;
 
 struct GlobalDeclarationResolver : public Visitor {
     /**
+     * Common things, u know.
+     */
+    Session & session;
+    /**
      * A shorthand.
      */
     Scope * global_scope = nullptr;
 
+
+    // I wish u knew how much I hate the need to
+    // manually write such stupid constructors...
+    GlobalDeclarationResolver(Session & session) : session(session) {}
+
+
+    virtual void visit(AST::DetailedNode<AST::NodeList> * it) override {
+        for (auto that : it->details.values) {
+            that->accept(this);
+        }
+    }
+
     virtual void visit(DetailedNode<GlobalNode> * it) override {
         global_scope = it->details.scope;
         it->details.files->accept(this);
+    }
+
+    virtual void visit(DetailedNode<FileNode> * it) override {
+        it->details.root->accept(this);
     }
 
     virtual void visit(DetailedNode<FunctionStatementNode> * it) override {
@@ -28,7 +48,7 @@ struct GlobalDeclarationResolver : public Visitor {
         if (name != nullptr) {
             global_scope->add(name->details.value, it);
         } else {
-            // session.reporter <<
+            std::cout << "!!GlobalDeclarationResolver encountered a non-identifier as a function name: `" << *it->details.name << "`!!" << std::endl;
         }
     }
 
@@ -45,7 +65,7 @@ struct GlobalDeclarationResolver : public Visitor {
                     global_scope->add(name->details.value, it);
                 // }
             } else {
-                // session.reporter <<
+                std::cout << "!!GlobalDeclarationResolver encountered a non-identifier as a constant name name: `" << *names[that] << "`!!" << std::endl;
             }
         }
     }
@@ -56,7 +76,7 @@ struct GlobalDeclarationResolver : public Visitor {
         if (name != nullptr) {
             global_scope->add(name->details.value, it);
         } else {
-            // session.reporter <<
+            std::cout << "!!GlobalDeclarationResolver has no implementation for non-identifier type aliases names: `" << *it->details.type << "`!!" << std::endl;
         }
     }
 
@@ -69,14 +89,14 @@ struct GlobalDeclarationResolver : public Visitor {
             if (name != nullptr) {
                 global_scope->add(name->details.value, it);
             } else {
-                // session.reporter <<
+                std::cout << "!!GlobalDeclarationResolver encountered a non-identifier as a variable name name: `" << *names[that] << "`!!" << std::endl;
             }
         }
     }
 };
 
 
-void cringe::resolve_global_declarations(AST::Node * node) {
-    GlobalDeclarationResolver resolver;
+void cringe::resolve_global_declarations(Session & session, AST::Node * node) {
+    GlobalDeclarationResolver resolver{session};
     node->accept(&resolver);
 }
