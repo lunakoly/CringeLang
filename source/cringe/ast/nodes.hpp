@@ -80,6 +80,12 @@ struct cringe::AST::GlobalNode {
 };
 
 
+struct cringe::AST::FileNode {
+    std::string filename;
+    Node * root;
+};
+
+
 struct cringe::AST::ConstantDeclarationNode {
     DetailedNode<NodeList> * constants;
     DetailedNode<NodeList> * values;

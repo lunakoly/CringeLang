@@ -1,10 +1,9 @@
-==== Diagnostics ====
-
-==== AST ====
+==== Raw AST ====
 [var [keker, loler]: ([Loler<[Int, String<[Bool]>]>, Int] -> Char) = ["hello", ((((((((10 + (31 * 4)) - 1) - 4) - (-4)) + 53) - 62) + 174) + "test")], var [a, b]: <!MISSING TYPE!><!> = [10, 11], var [c]: Int, let [pi, e]: <!MISSING TYPE!><!> = [3.14159, 2.71828], typealias Callback = (Int -> Int), typealias Chain<[T]> = (T -> (Test<[String]> -> Bool)), ([a, b] = [0]), ([dawd] = [1]), if (test + fest) [([a] = [d])] else [([b] = [(-d)])], if (gest * 2) [[([keker] = [10]), ([a, b] = [0, 1])]] else [([loler] = [12])], ([andOnNewLine] = ["Hello"])]
 
-==== RESOLVED ====
-*** FILE 0 ***
+==== Resolved AST ====
 [var [keker, loler]: [BINARY] = ["hello", ((((((((10 + (31 * 4)) - 1) - 4) - (-4)) + 53) - 62) + 174) + "test")], var [a, b]: Int = [10, 11], var [c]: Int, let [pi, e]: Real = [3.14159, 2.71828], typealias Callback = [BINARY], typealias Chain<[T]> = [BINARY], ([a, b] = [0]), ([dawd] = [1]), if (test + fest) [([a] = [d])] else [([b] = [(-d)])], if (gest * 2) [[([keker] = [10]), ([a, b] = [0, 1])]] else [([loler] = [12])], ([andOnNewLine] = ["Hello"])]
+
+==== Diagnostics ====
 
 ==== Done ====

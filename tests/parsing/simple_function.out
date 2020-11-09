@@ -1,10 +1,9 @@
-==== Diagnostics ====
-
-==== AST ====
+==== Raw AST ====
 [fun test ([var [a]: Int = [10], var [b]: String]): Float [[([a] = [10]), ([b] = [29])]], fun test ([]): Boolean [[(print * 2)]], fun rest ([]): <!MISSING RETURN TYPE!><!> [[[keker]]]]
 
-==== RESOLVED ====
-*** FILE 0 ***
+==== Resolved AST ====
 [fun test ([var [a]: Int = [10], var [b]: String]): [ERROR:UNRESOLVED_IDENTIFIER] [[([a] = [10]), ([b] = [29])]], fun test ([]): [ERROR:UNRESOLVED_IDENTIFIER] [[(print * 2)]], fun rest ([]): [ERROR:UNRESOLVED_IDENTIFIER] [[[keker]]]]
+
+==== Diagnostics ====
 
 ==== Done ====

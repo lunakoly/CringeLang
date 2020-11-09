@@ -38,6 +38,10 @@ struct cringe::AST::Explorer : public cringe::AST::Visitor {
         it->details.files->accept(this);
     }
 
+    virtual void visit(AST::DetailedNode<AST::FileNode> * it) override {
+        it->details.root->accept(this);
+    }
+
     virtual void visit(AST::DetailedNode<AST::ConstantDeclarationNode> * it) override {
         it->details.constants->accept(this);
 

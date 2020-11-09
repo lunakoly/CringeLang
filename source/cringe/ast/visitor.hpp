@@ -35,6 +35,10 @@ namespace cringe {
          */
         struct GlobalNode;
         /**
+         * Filename + root node.
+         */
+        struct FileNode;
+        /**
          * Safe way to cast nodes.
          */
         template <typename T>
@@ -119,6 +123,10 @@ struct cringe::AST::Visitor {
     }
 
     virtual void visit(AST::DetailedNode<AST::GlobalNode> * it) {
+        visit((AST::Node *) it);
+    }
+
+    virtual void visit(AST::DetailedNode<AST::FileNode> * it) {
         visit((AST::Node *) it);
     }
 

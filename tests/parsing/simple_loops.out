@@ -1,13 +1,12 @@
+==== Raw AST ====
+[while ((doThings * 10) + 1) [[([a] = [10]), [(b * test)]]], while a [([b] = [10])], [[testError]], [done]]
+
+==== Resolved AST ====
+[while ((doThings * 10) + 1) [[([a] = [10]), [(b * test)]]], while a [([b] = [10])], [[testError]], [done]]
+
 ==== Diagnostics ====
  5 | ...<newline>    testError<newline><newline>...
                  ~~~~^~~~~~~~~
-Error > Line 5 > Unexpected indent level > `INDENT` shouldn't go here.
-
-==== AST ====
-[while ((doThings * 10) + 1) [[([a] = [10]), [(b * test)]]], while a [([b] = [10])], [[testError]], [done]]
-
-==== RESOLVED ====
-*** FILE 0 ***
-[while ((doThings * 10) + 1) [[([a] = [10]), [(b * test)]]], while a [([b] = [10])], [[testError]], [done]]
+Error > Unexpected indent level > `INDENT` shouldn't go here.
 
 ==== Done ====

@@ -10,13 +10,13 @@ using namespace cringe;
 
 __PRINT_DIAGNOSTIC__(BadTokenDiagnostic) {
     return __DIAGNOSTIC_HEADER__
-        << " > Something weird found: `" << details.found << "`. Is it yours?";
+        << "Something weird found: `" << details.found << "`. Is it yours?";
 }
 
 
 __PRINT_DIAGNOSTIC__(InvalidIndentDiagnostic) {
     return __DIAGNOSTIC_HEADER__
-        << " > Invalid indent level > `" << details.indent_level
+        << "Invalid indent level > `" << details.indent_level
         << "` spaces indent can't follow a(n) `" << details.old_indent
         << "` spaces one at `" << details.found << "`.";
 }
@@ -24,13 +24,13 @@ __PRINT_DIAGNOSTIC__(InvalidIndentDiagnostic) {
 
 __PRINT_DIAGNOSTIC__(UnexpectedIndentDiagnostic) {
     return __DIAGNOSTIC_HEADER__
-        << " > Unexpected indent level > `" << details.type << "` shouldn't go here.";
+        << "Unexpected indent level > `" << details.type << "` shouldn't go here.";
 }
 
 
 __PRINT_DIAGNOSTIC__(SingleQuoteExpectedDiagnostic) {
     return __DIAGNOSTIC_HEADER__
-        << " > Expected `'`, but `"
+        << "Expected `'`, but `"
         << details.found << "` found in `" << details.whole_token << "`. Otherwise you "
         << "have a character literal declaration without a closing `'`.";
 }
@@ -90,17 +90,17 @@ __PRINT_DIAGNOSTIC__(OperatorExpectedDiagnostic) {
     }
 
     return __DIAGNOSTIC_HEADER__
-        << " > `" << details.operator_token << "` expected.";
+        << "`" << details.operator_token << "` expected.";
 }
 
 
 __PRINT_DIAGNOSTIC__(ExpressionExpectedDiagnostic) {
     return __DIAGNOSTIC_HEADER__
-        << " > Expression expected but `" << details.found << "` found.";
+        << "Expression expected but `" << details.found << "` found.";
 }
 
 
 __PRINT_DIAGNOSTIC__(TypeRedeclarationDiagnostic) {
     return __DIAGNOSTIC_HEADER__
-        << " > Type `" << details.name << "` has already been declared.";
+        << "Type `" << details.name << "` has already been declared.";
 }

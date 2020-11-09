@@ -1,13 +1,12 @@
+==== Raw AST ====
+[if (10 - 5) [[[sayHello]]] else [[[sayBye]]], if iAmTrue [[doThings]] else [[doOtherThings]], if True [[sayTest]] else [[([a] = [b]), ([c] = [(10 + a)])]], if test [[sayFest]], [[errorIndent], [error2]], ([a, b] = [10, 20])]
+
+==== Resolved AST ====
+[if (10 - 5) [[[sayHello]]] else [[[sayBye]]], if iAmTrue [[doThings]] else [[doOtherThings]], if True [[sayTest]] else [[([a] = [b]), ([c] = [(10 + a)])]], if test [[sayFest]], [[errorIndent], [error2]], ([a, b] = [10, 20])]
+
 ==== Diagnostics ====
  13 | ...<newline>    errorIndent...
                   ~~~~^~~~~~~~~~~
-Error > Line 13 > Unexpected indent level > `INDENT` shouldn't go here.
-
-==== AST ====
-[if (10 - 5) [[[sayHello]]] else [[[sayBye]]], if iAmTrue [[doThings]] else [[doOtherThings]], if True [[sayTest]] else [[([a] = [b]), ([c] = [(10 + a)])]], if test [[sayFest]], [[errorIndent], [error2]], ([a, b] = [10, 20])]
-
-==== RESOLVED ====
-*** FILE 0 ***
-[if (10 - 5) [[[sayHello]]] else [[[sayBye]]], if iAmTrue [[doThings]] else [[doOtherThings]], if True [[sayTest]] else [[([a] = [b]), ([c] = [(10 + a)])]], if test [[sayFest]], [[errorIndent], [error2]], ([a, b] = [10, 20])]
+Error > Unexpected indent level > `INDENT` shouldn't go here.
 
 ==== Done ====

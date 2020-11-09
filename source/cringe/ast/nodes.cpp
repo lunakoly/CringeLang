@@ -33,14 +33,20 @@ __PRINT_NODE__(GlobalNode) {
 
     if (!files.empty()) {
         for (size_t it = 0; it < files.size() - 1; it++) {
-            output << "*** FILE " << it << " ***" << std::endl;
+            output << *files[it] << std::endl;
         }
 
-        output << "*** FILE " << files.size() - 1 << " ***" << std::endl;
         return output << *files.back();
     }
 
-    return output << "<!NO_FILES!><!>" << std::endl;
+    return output << "<!NO_FILES!><!>";
+}
+
+
+__PRINT_NODE__(FileNode) {
+    return output
+        << "*** FILE " << details.filename << " ***" << std::endl
+        << *details.root;
 }
 
 

@@ -283,6 +283,7 @@ struct ParsingContextBackend {
         }
 
         session.reporter << BadTokenDiagnostic{
+            .filename = filename,
             .line_number = line_number,
             .range = {start, input.get_offset()},
             .visualization = visualization,
@@ -309,6 +310,7 @@ struct ParsingContextBackend {
         }
 
         session.reporter << BadTokenDiagnostic{
+            .filename = filename,
             .line_number = line_number,
             .range = {start, input.get_offset()},
             .visualization = visualization,
@@ -554,6 +556,7 @@ struct ParsingContextBackend {
             auto it = input.peek();
 
             session.reporter << SingleQuoteExpectedDiagnostic{
+                .filename = filename,
                 .line_number = line_number,
                 .range = {input.get_offset(), input.get_offset() + 1},
                 .visualization = visualize(),
@@ -656,6 +659,7 @@ struct ParsingContextBackend {
             auto it = read_error();
 
             session.reporter << OperatorExpectedDiagnostic{
+                .filename = filename,
                 .line_number = line_number,
                 .range = {start, input.get_offset()},
                 .visualization = visualization,
@@ -676,6 +680,7 @@ struct ParsingContextBackend {
         auto error = read_error();
 
         session.reporter << AnotherTokenTypeExpectedDiagnostic{
+            .filename = filename,
             .line_number = line_number,
             .range = {start, input.get_offset()},
             .visualization = visualization,
@@ -757,6 +762,7 @@ struct ParsingContextBackend {
         auto error = read_error();
 
         session.reporter << ExpressionExpectedDiagnostic{
+            .filename = filename,
             .line_number = line_number,
             .range = {start, input.get_offset()},
             .visualization = visualization,
@@ -1049,6 +1055,7 @@ struct ParsingContextBackend {
     void parse_command_without_indent(DetailedNode<NodeList> * commands) {
         if (read_indent()) {
             session.reporter << UnexpectedIndentDiagnostic{
+                .filename = filename,
                 .line_number = line_number,
                 .range = {input.get_offset(), input.get_offset() + 1},
                 .visualization = visualize(),
@@ -1083,7 +1090,10 @@ struct ParsingContextBackend {
     }
 
     Node * parse() {
-        return parse_commands();
+        return $ FileNode {
+            .filename = filename,
+            .root = parse_commands()
+        };
     }
 };
 

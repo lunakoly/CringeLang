@@ -15,6 +15,10 @@
 
 #define __DIAGNOSTIC__                                      \
     /**                                                     \
+     * Full path to the input file.                         \
+     */                                                     \
+    std::string filename;                                   \
+    /**                                                     \
      * The line the error was found at.                     \
      */                                                     \
     size_t line_number;                                     \
@@ -31,10 +35,11 @@
      */                                                     \
     std::string visualization;
 
-#define __DIAGNOSTIC_HEADER__                           \
-    output                                              \
-        << details.visualization << '\n'                \
-        << "Error > Line " << details.line_number       \
+#define __DIAGNOSTIC_HEADER__                                                                 \
+    output                                                                                    \
+        << details.visualization << '\n'                                                      \
+        << "Quick Link > " << details.filename << "(" << details.line_number << ",1)" << '\n' \
+        << "Error > "
 
 
 namespace orders {
