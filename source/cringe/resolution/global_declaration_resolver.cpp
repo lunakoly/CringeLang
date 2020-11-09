@@ -1,6 +1,7 @@
 #include "global_declaration_resolver.hpp"
-#include "ast/nodes.hpp"
-#include "types.hpp"
+
+#include "../ast/nodes.hpp"
+#include "../ast/scopes.hpp"
 
 #include <stack>
 #include <iostream>

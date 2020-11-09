@@ -7,8 +7,8 @@
 
 // #include <orders/parsing/analyzer.hpp>
 
-#include "session.hpp"
-#include "ast/nodes.hpp"
+#include "../session.hpp"
+#include "../ast/nodes.hpp"
 // #include "lexer.hpp"
 
 

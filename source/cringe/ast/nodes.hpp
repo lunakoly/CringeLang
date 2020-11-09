@@ -6,7 +6,7 @@
 #pragma once
 
 #include "visitor.hpp"
-#include "../types.hpp"
+#include "scopes.hpp"
 
 #include <orders/util/printable.hpp>
 

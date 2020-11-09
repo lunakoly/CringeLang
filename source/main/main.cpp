@@ -8,10 +8,10 @@
 #include <orders/streams/implementations/std_stream.hpp>
 
 #include <cringe/about.hpp>
-#include <cringe/parser.hpp>
-#include <cringe/scope_resolver.hpp>
-#include <cringe/global_declaration_resolver.hpp>
-#include <cringe/deep_declaration_resolver.hpp>
+#include <cringe/parsing/parser.hpp>
+#include <cringe/resolution/scope_resolver.hpp>
+#include <cringe/resolution/global_declaration_resolver.hpp>
+#include <cringe/resolution/deep_declaration_resolver.hpp>
 
 
 cringe::AST::Node * parse_file(

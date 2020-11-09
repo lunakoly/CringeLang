@@ -1,6 +1,7 @@
 #include "deep_declaration_resolver.hpp"
-#include "ast/explorer.hpp"
-#include "types.hpp"
+
+#include "../ast/explorer.hpp"
+#include "../ast/scopes.hpp"
 
 #include <stack>
 #include <iostream>

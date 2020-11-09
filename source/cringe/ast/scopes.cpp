@@ -1,5 +1,5 @@
-#include "types.hpp"
-#include "ast/nodes.hpp"
+#include "scopes.hpp"
+#include "nodes.hpp"
 
 
 using namespace cringe;

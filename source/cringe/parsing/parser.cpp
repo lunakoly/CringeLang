@@ -1,7 +1,7 @@
 #include "parser.hpp"
 
-#include "diagnostics.hpp"
-#include "ast/probably.hpp"
+#include "../diagnostics.hpp"
+#include "../ast/probably.hpp"
 
 #include <fstream>
 

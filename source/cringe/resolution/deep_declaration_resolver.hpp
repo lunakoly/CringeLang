@@ -5,8 +5,8 @@
 
 #pragma once
 
-#include "ast/visitor.hpp"
-#include "session.hpp"
+#include "../ast/visitor.hpp"
+#include "../session.hpp"
 
 
 namespace cringe {
