@@ -3,6 +3,11 @@
 #include "diagnostics.hpp"
 #include "ast/probably.hpp"
 
+#include <fstream>
+
+#include <orders/streams/implementations/std_stream.hpp>
+#include <orders/streams/implementations/analyzable_stream.hpp>
+
 
 using namespace cringe;
 using namespace cringe::AST;
@@ -54,6 +59,11 @@ struct ParsingContextBackend {
      * lives.
      */
     Session & session;
+
+    /**
+     * Full path to the input file.
+     */
+    std::string filename;
 
     /**
      * A single file input.
@@ -1079,5 +1089,19 @@ struct ParsingContextBackend {
 
 
 Node * cringe::ParsingContext::to_ast() {
-    return ParsingContextBackend{session, input}.parse();
+    std::fstream file{filename};
+
+    if (file.fail()) {
+        std::cout << "Error > File `" << filename << "` could not be found." << std::endl;
+        return nullptr;
+    }
+
+    orders::StdStream input{file};
+    orders::AnalyzableStream analyzable_input{input};
+
+    return ParsingContextBackend{
+        .session = session,
+        .filename = filename,
+        .input = analyzable_input
+    }.parse();
 }

@@ -25,9 +25,9 @@ namespace cringe {
         Session & session;
 
         /**
-         * A single file input.
+         * Full path to the input file.
          */
-        orders::AnalyzableStream input;
+        std::string filename;
 
         /**
          * Builds an abstract syntax tree.

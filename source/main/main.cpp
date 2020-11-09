@@ -18,18 +18,9 @@ cringe::AST::Node * parse_file(
     cringe::Session & session,
     const std::string & filename
 ) {
-    std::fstream file{filename};
-
-    if (file.fail()) {
-        std::cout << "Error > File `" << filename << "` could not be found." << std::endl;
-        return nullptr;
-    }
-
-    orders::StdStream input{file};
-
     cringe::ParsingContext context{
         .session = session,
-        .input = orders::AnalyzableStream{input}
+        .filename = filename
     };
 
     return context.to_ast();
