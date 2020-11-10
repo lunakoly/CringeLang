@@ -12,7 +12,11 @@
 
 namespace cringe {
     /**
-     * Builds an abstract syntax tree.
+     * Builds an abstract syntax tree for the single file.
      */
-    AST::Node * parse(Session & session, const std::string & filename);
+    AST::DetailedNode<AST::FileNode> * parse_file(Session & session, const std::string & filename);
+    /**
+     * Builds an abstract syntax tree for all the files.
+     */
+    AST::DetailedNode<AST::GlobalNode> * parse_files(Session & session, const std::vector<std::string> & filenames);
 }

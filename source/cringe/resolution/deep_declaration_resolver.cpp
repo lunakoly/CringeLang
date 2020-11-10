@@ -482,7 +482,21 @@ struct DeepDeclarationResolver : public Explorer {
 };
 
 
-void cringe::resolve_deep_declarations(Session & session, AST::Node * node) {
-    DeepDeclarationResolver resolver{session};
-    node->accept(&resolver);
+void cringe::resolve_deep_declarations(Session & session, DetailedNode<GlobalNode> * node) {
+    if (session.options.no_parallel) {
+        DeepDeclarationResolver resolver{session};
+        node->accept(&resolver);
+    } else {
+        for (auto it : node->details.files->details.values) {
+            session.pool->schedule([&, it]() {
+                DeepDeclarationResolver resolver{session};
+                // as long as global scope is not modified,
+                // this is not an issue
+                resolver.scopes.push(node->details.scope);
+                it->accept(&resolver);
+            });
+        }
+
+        session.pool->wait();
+    }
 }

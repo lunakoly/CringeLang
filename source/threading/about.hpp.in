@@ -1,0 +1,5 @@
+// Copyright (C) 2020 luna_koly
+
+
+#define __THREADING_VERSION_MAJOR__ @ThreadingProject_VERSION_MAJOR@
+#define __THREADING_VERSION_MINOR__ @ThreadingProject_VERSION_MINOR@

@@ -4,9 +4,12 @@
 #include "../ast/probably.hpp"
 
 #include <fstream>
+#include <mutex>
 
 #include <orders/streams/implementations/std_stream.hpp>
 #include <orders/streams/implementations/analyzable_stream.hpp>
+
+#include <threading/thread_pool.hpp>
 
 
 using namespace cringe;
@@ -1089,7 +1092,7 @@ struct ParsingContextBackend {
         return commands;
     }
 
-    Node * parse() {
+    DetailedNode<FileNode> * parse() {
         return $ FileNode {
             .filename = filename,
             .root = parse_commands()
@@ -1098,7 +1101,7 @@ struct ParsingContextBackend {
 };
 
 
-Node * cringe::parse(Session & session, const std::string & filename) {
+DetailedNode<FileNode> * cringe::parse_file(Session & session, const std::string & filename) {
     std::fstream file{filename};
 
     if (file.fail()) {
@@ -1114,4 +1117,40 @@ Node * cringe::parse(Session & session, const std::string & filename) {
         .filename = filename,
         .input = analyzable_input
     }.parse();
+}
+
+
+DetailedNode<GlobalNode> * cringe::parse_files(Session & session, const std::vector<std::string> & filenames) {
+    auto global = $ GlobalNode{
+        .files = $ NodeList{}
+    };
+
+    if (session.options.no_parallel) {
+        for (auto that = filenames.begin(); that != filenames.end(); that++) {
+            auto it = cringe::parse_file(session, *that);
+
+            if (it != nullptr) {
+                global->details.files->details.values.push_back(it);
+            }
+        }
+    } else {
+        std::mutex global_lock;
+
+        for (auto that = filenames.begin(); that != filenames.end(); that++) {
+            auto filename = *that;
+
+            session.pool->schedule([&, filename]() {
+                auto it = cringe::parse_file(session, filename);
+
+                if (it != nullptr) {
+                    std::lock_guard lock(global_lock);
+                    global->details.files->details.values.push_back(it);
+                }
+            });
+        }
+
+        session.pool->wait();
+    }
+
+    return global;
 }

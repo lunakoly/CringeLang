@@ -11,6 +11,7 @@ cases = [
     {
         'directory': f'{SCRIPT_DIRECTORY}/parsing/',
         'command': COMPILER_PATH + ' --std 1',
+        # 'command': COMPILER_PATH + ' --std 1 --no-parallel',
     },
 ]
 

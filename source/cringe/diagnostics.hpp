@@ -9,14 +9,6 @@
 #include <orders/parsing/diagnostics.hpp>
 
 
-// #define __DIAGNOSTIC_WITH_FILENAME__                        \
-//     __DIAGNOSTIC__                                          \
-//     /**                                                     \
-//      * Full path to the input file.                         \
-//      */                                                     \
-//     std::string filename;
-
-
 namespace cringe {
     /**
      * 'dawd instead of 'd'.

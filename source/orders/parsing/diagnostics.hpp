@@ -10,6 +10,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <mutex>
 
 #include "../util/printable.hpp"
 
@@ -110,6 +111,10 @@ namespace orders {
          * some warnings/errors.
          */
         std::vector<Diagnostic *> diagnostics;
+        /**
+         * Allows concurrency.
+         */
+        std::mutex diagnostics_protector;
 
         /**
          * Adds the diagnostic to the inner
@@ -117,6 +122,7 @@ namespace orders {
          */
         template <typename D>
         void report(D && diagnostic) {
+            std::lock_guard lock(diagnostics_protector);
             auto it = new DetailedDiagnostic<D>{std::move(diagnostic)};
             diagnostics.push_back(it);
         }

@@ -11,4 +11,4 @@ add_executable(
         "main.cpp"
 )
 
-target_link_libraries(CringeLang Orders Cringe)
+target_link_libraries(CringeLang Orders Cringe Threading)

@@ -3,5 +3,6 @@
 
 add_subdirectory(arrrgh)
 add_subdirectory(orders)
+add_subdirectory(threading)
 add_subdirectory(cringe)
 add_subdirectory(main)

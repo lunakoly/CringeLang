@@ -13,5 +13,5 @@ namespace cringe {
     /**
      * Resolves the types.
      */
-    void resolve_deep_declarations(Session & session, AST::Node * node);
+    void resolve_deep_declarations(Session & session, AST::DetailedNode<AST::GlobalNode> * node);
 }

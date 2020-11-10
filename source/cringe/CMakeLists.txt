@@ -39,4 +39,4 @@ add_library(
         "resolution/deep_declaration_resolver.cpp"
 )
 
-target_link_libraries(Cringe Orders)
+target_link_libraries(Cringe Orders Threading)
