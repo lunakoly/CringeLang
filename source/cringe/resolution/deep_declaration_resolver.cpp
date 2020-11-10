@@ -256,6 +256,12 @@ struct DeepDeclarationResolver : public Explorer {
     }
 
     virtual void visit(AST::DetailedNode<AST::BinaryExpressionNode> * it) override {
+        it->details.left->accept(this);
+        declarations.pop();
+
+        it->details.right->accept(this);
+        declarations.pop();
+
         declarations.push($ TypeNode{
             .identifier = $ IdentifierNode{"[BINARY]"},
             .subtypes = $ NodeList()
@@ -263,6 +269,9 @@ struct DeepDeclarationResolver : public Explorer {
     }
 
     virtual void visit(AST::DetailedNode<AST::UnaryExpressionNode> * it) override {
+        it->details.target->accept(this);
+        declarations.pop();
+
         declarations.push($ TypeNode{
             .identifier = $ IdentifierNode{"[UNARY]"},
             .subtypes = $ NodeList()

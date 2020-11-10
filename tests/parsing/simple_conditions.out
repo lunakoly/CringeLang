@@ -29,6 +29,14 @@ Error > Unresolved reference `True`.
 [MISSING_VISUALIZATION]
 Error > Unresolved reference `sayTest`.
 [MISSING_VISUALIZATION]
+Error > Unresolved reference `a`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `b`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `c`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `a`.
+[MISSING_VISUALIZATION]
 Error > Unresolved reference `test`.
 [MISSING_VISUALIZATION]
 Error > Unresolved reference `sayFest`.
@@ -36,5 +44,9 @@ Error > Unresolved reference `sayFest`.
 Error > Unresolved reference `errorIndent`.
 [MISSING_VISUALIZATION]
 Error > Unresolved reference `error2`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `a`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `b`.
 
 ==== Done ====

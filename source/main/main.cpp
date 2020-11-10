@@ -46,7 +46,9 @@ int run() {
         auto filename = std::filesystem::absolute(arrrgh::parameters[that]).string();
         auto it = cringe::parse(session, filename);
 
-        global->details.files->details.values.push_back(it);
+        if (it != nullptr) {
+            global->details.files->details.values.push_back(it);
+        }
     }
 
     std::cout << "==== Raw AST ====" << std::endl;

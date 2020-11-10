@@ -24,6 +24,12 @@
 
 ==== Diagnostics ====
 [MISSING_VISUALIZATION]
+Error > Unresolved reference `c`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `Bool`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `Bool`.
+[MISSING_VISUALIZATION]
 Error > Unresolved reference `Fhar`.
 
 ==== Done ====

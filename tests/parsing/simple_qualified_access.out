@@ -13,5 +13,9 @@
 -- doThings := fun doThings ([]): [DIFFICULT_TYPE] [[([a.name, b.index] = ["test", 20])]]
 
 ==== Diagnostics ====
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `a.name`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `b.index`.
 
 ==== Done ====

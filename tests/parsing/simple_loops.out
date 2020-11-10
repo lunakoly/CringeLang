@@ -15,7 +15,17 @@
                  ~~~~^~~~~~~~~
 Error > Unexpected indent level > `INDENT` shouldn't go here.
 [MISSING_VISUALIZATION]
+Error > Unresolved reference `doThings`.
+[MISSING_VISUALIZATION]
 Error > Unresolved reference `a`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `b`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `test`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `a`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `b`.
 [MISSING_VISUALIZATION]
 Error > Unresolved reference `testError`.
 [MISSING_VISUALIZATION]

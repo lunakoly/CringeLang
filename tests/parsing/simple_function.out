@@ -18,6 +18,8 @@
 [MISSING_VISUALIZATION]
 Error > Unresolved reference `Float`.
 [MISSING_VISUALIZATION]
+Error > Unresolved reference `print`.
+[MISSING_VISUALIZATION]
 Error > Unresolved reference `Boolean`.
 [MISSING_VISUALIZATION]
 Error > Unresolved reference `keker`.

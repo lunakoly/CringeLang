@@ -3,7 +3,9 @@
 
 !!GlobalDeclarationResolver has no implementation for non-identifier type aliases names: `Callback`!!
 !!GlobalDeclarationResolver has no implementation for non-identifier type aliases names: `Chain<[T]>`!!
+!!DeepDeclarationResolver has no implementation for non-identifier type nodes names: `Loler`!!
 !!DeepDeclarationResolver has no implementation for non-identifier type aliases names: `Callback`!!
+!!DeepDeclarationResolver has no implementation for non-identifier type nodes names: `Test`!!
 !!DeepDeclarationResolver has no implementation for non-identifier type aliases names: `Chain<[T]>`!!
 ==== Resolved AST ====
 [var [keker, loler]: [BINARY] = ["hello", ((((((((10 + (31 * 4)) - 1) - 4) - (-4)) + 53) - 62) + 174) + "test")], var [a, b]: Int = [10, 11], var [c]: Int, let [pi, e]: Real = [3.14159, 2.71828], typealias Callback = [BINARY], typealias Chain<[T]> = [BINARY], ([a, b] = [0]), ([dawd] = [1]), if (test + fest) [([a] = [d])] else [([b] = [(-d)])], if (gest * 2) [[([keker] = [10]), ([a, b] = [0, 1])]] else [([loler] = [12])], ([andOnNewLine] = ["Hello"])]
@@ -22,5 +24,19 @@
 -- pi := let [pi, e]: Real = [3.14159, 2.71828]
 
 ==== Diagnostics ====
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `T`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `Bool`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `dawd`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `test`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `fest`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `gest`.
+[MISSING_VISUALIZATION]
+Error > Unresolved reference `andOnNewLine`.
 
 ==== Done ====
