@@ -14,19 +14,6 @@
 #include <cringe/resolution/deep_declaration_resolver.hpp>
 
 
-cringe::AST::Node * parse_file(
-    cringe::Session & session,
-    const std::string & filename
-) {
-    cringe::ParsingContext context{
-        .session = session,
-        .filename = filename
-    };
-
-    return context.to_ast();
-}
-
-
 void visualize_scope(cringe::AST::Scope * scope, const std::string & indent = "--") {
     for (auto that : scope->get_declarations()) {
         std::cout << indent << ' ' << that.first << " := " << *that.second << std::endl;
@@ -57,8 +44,8 @@ int run() {
 
     for (size_t that = 1; that < arrrgh::parameters.size(); that++) {
         auto filename = std::filesystem::absolute(arrrgh::parameters[that]).string();
+        auto it = cringe::parse(session, filename);
 
-        auto it = parse_file(session, filename);
         global->details.files->details.values.push_back(it);
     }
 

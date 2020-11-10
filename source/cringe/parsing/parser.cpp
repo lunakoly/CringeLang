@@ -1098,7 +1098,7 @@ struct ParsingContextBackend {
 };
 
 
-Node * cringe::ParsingContext::to_ast() {
+Node * cringe::parse(Session & session, const std::string & filename) {
     std::fstream file{filename};
 
     if (file.fail()) {
