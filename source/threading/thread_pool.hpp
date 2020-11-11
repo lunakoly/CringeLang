@@ -56,6 +56,10 @@ namespace threading {
          */
         std::mutex tasks_protector;
         /**
+         * The number of busy workers.
+         */
+        int busy_workers_count = 0;
+        /**
          * Used to distribute events about
          * unprocessed tasks left.
          */

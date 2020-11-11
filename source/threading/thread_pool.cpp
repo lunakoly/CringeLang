@@ -13,6 +13,8 @@ ThreadPool::ThreadPool(int workers_count) {
 
     // std::cout << "//Starting a pool with " << workers_count << " workers//" << std::endl;
 
+    busy_workers_count = workers_count;
+
     for (size_t it = 0; it < workers_count; it++) {
         // `ThreadPool::` is required here
         workers.push_back(std::thread(&ThreadPool::process, this));
@@ -72,6 +74,12 @@ void ThreadPool::process() {
         {
             std::unique_lock lock(tasks_protector);
 
+            busy_workers_count -= 1;
+
+            if (tasks.empty() && busy_workers_count == 0) {
+                all_tasks_processed_notifier.notify_all();
+            }
+
             notifier.wait(lock, [&]() {
                 return !tasks.empty() || should_stop;
             });
@@ -80,19 +88,13 @@ void ThreadPool::process() {
                 break;
             }
 
+            busy_workers_count += 1;
+
             task = tasks.front();
             tasks.pop();
         }
 
         task();
-
-        {
-            std::lock_guard lock(tasks_protector);
-
-            if (tasks.empty()) {
-                all_tasks_processed_notifier.notify_all();
-            }
-        }
     }
 }
 
@@ -101,6 +103,6 @@ void ThreadPool::wait() {
     std::unique_lock lock(tasks_protector);
 
     all_tasks_processed_notifier.wait(lock, [&]() {
-        return tasks.empty();
+        return tasks.empty() && busy_workers_count == 0;
     });
 }
